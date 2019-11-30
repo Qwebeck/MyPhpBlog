@@ -13,7 +13,7 @@
     <div class="centered">
         <h1>Add post</h1>
     
-    <form action="actions/add_post.php" method="POST" enctype="multipart/form-data">
+    <form enctype="multipart/form-data" method="POST" action="actions/add_post.php"  >
         <h2>And who you are ?</h2>
         <input type="text" name="username" placeholder="Username"/>
         <input type="password" name="passwd" placeholder="Password"/>
@@ -22,9 +22,9 @@
         <textarea name="description" rows="6" cols="40" placeholder="Your post going here"></textarea>
         <input name="current_date" type="date" value="<?php echo date('Y-m-d');?>" />
         <input name="current_time" type="text" value="<?php echo date('H:i');?>" />
-        Attachment 1 <input type="file" name="my_file" />
-        <!-- Attachment 2 <input type="file" name="att2" />
-        Attachment 3 <input type="file" name="att3" /> -->
+        Attachment 1 <input type="file" name="att1" />
+        Attachment 2 <input type="file" name="att2" />
+        Attachment 3 <input type="file" name="att3" />
         <div class="buttons">
                 <input type="submit" value="Add post">
                 <input type="reset" value="Clean" />        

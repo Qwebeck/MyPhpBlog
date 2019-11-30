@@ -40,7 +40,7 @@
             for($i = 2;$i < sizeof($posts);++$i){
                 if(!strcmp($posts[$i],"info")){}
                 else include($blog_location.'/'.$posts[$i].'/'.$posts[$i].'.html');
-                echo "<div class='comment_section'>"
+                echo "<div class='comment-section'>"
                 .generate_comments($blog_location.'/'.$posts[$i].'/')."</div>";
             }
         } else {

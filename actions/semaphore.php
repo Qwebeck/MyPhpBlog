@@ -7,6 +7,6 @@ $auto_release = 1;
 $semaphore = sem_get($key,$max,$permission,$auto_release);
 if(!$semaphore) {
     echo "Failed on sem_get().\n";
-    header("Location: ../main_page.html?success=false");
+    header("Location: ../blog.php?success=false");
 }
 ?>

@@ -41,12 +41,22 @@
             $post_dir = $blog_dir.$post_id;
             mkdir($post_dir,0777);
             $post_dir = $post_dir.'/';
-            $attachments ="";
-        // for($a = 1;$a<4;++$a){
-            
-                
-        // }
-        
+            $attachments ="<div class='attachments'> <h4> Blog attachments:</h4>";
+            $att_number = 0;
+            for($a = 0;$a <= 3;++$a){
+                // if(!isset($_FILES["att".$a])) continue;
+                $path = $_FILES["att".$a]['name'];
+                $ext = pathinfo($path, PATHINFO_EXTENSION);
+                $target_file = $post_dir.$time_prefix.$a.'.'.$ext;
+            if (move_uploaded_file($_FILES["att".$a]["tmp_name"], $target_file)) {
+                $attachments.="<a href='user_blogs/".$blog_name.'/'.$post_id.'/'.$time_prefix.$a.'.'.$ext."'> Attachment ".$a."</a>";
+                $att_number += 1;
+            } else {
+            }
+            }
+            $attachments .="</div>";
+            if($att_number==0) $attachments = "";
+
             $post_content = fopen($post_dir.$post_id.'.html','w');
             $template = "
             <div class='post'>
@@ -59,16 +69,14 @@
             <input name='blog_dir' type='hidden' value='".$blog_name."'/>
             </form>
             </div>";
-        // fwrite($post_content,$_POST['post_title'].PHP_EOL);
             fwrite($post_content,$template);
             fclose($post_content);
-            header("Location: ../main_page.html?success=true");
+            header("Location: ../blog.php?success=true");
             sem_release($semaphore);
-        
         
     }
     else{
-        header("Location: ../main_page.html?success=false");
+        header("Location: ../blog.php?success=false");
 
     }
 

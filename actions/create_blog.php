@@ -12,9 +12,9 @@
       fwrite($info,$passwd.PHP_EOL);
       fwrite($info,$descr.PHP_EOL);
       fclose($info);
-      header("Location: ../main_page.html?success=true");
+      header("Location: ../blog.php?success=true");
     }else{
-      header("Location: ../main_page.html?success=day");
+      header("Location: ../blog.phpl?success=day");
     
     sem_release($semaphore);
  }
