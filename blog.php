@@ -14,18 +14,34 @@
 <div class="content">
 <?php
 
+    function generate_comments($target_post_dir){
+        $comment_section;
+        $i = 1;
+        if(is_dir($target_post_dir.'k')){
+        while($new = file_get_contents($target_post_dir.'k/'.$i.".html")){
+           $comment_section.=$new;
+           ++$i;
+        }
+        }
+        return $comment_section;
+    }
+
+
     if(isset($_GET['success']) && strcmp($_GET['success'],"true")==0) echo file_get_contents("success.html");
     elseif(isset($_GET['success']) && strcmp($_GET['success'],"false")==0) echo file_get_contents("fail.html");
-            
+
 
     if(isset($_GET['blog']) && !empty($_GET['blog'])){
-        $blog_location ='user_blogs/'.$_GET['blog'];
+        $blog_name = str_replace("'", "", $_GET['blog']);
+        $blog_location ='user_blogs/'.$blog_name;
         if(is_dir($blog_location)){
-            echo "<h1>".$_GET['blog']."</h1>";
+            echo "<h1>".$blog_name."</h1>";
             $posts = scandir($blog_location);
             for($i = 2;$i < sizeof($posts);++$i){
                 if(!strcmp($posts[$i],"info")){}
-                else echo file_get_contents($blog_location.'/'.$posts[$i].'/'.$posts[$i].'.html');
+                else include($blog_location.'/'.$posts[$i].'/'.$posts[$i].'.html');
+                echo "<div class='comment_section'>"
+                .generate_comments($blog_location.'/'.$posts[$i].'/')."</div>";
             }
         } else {
             echo "No blog exist";

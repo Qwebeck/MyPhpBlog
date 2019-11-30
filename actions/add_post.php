@@ -1,10 +1,14 @@
 <?php
-    
+    include("semaphore.php");
     function parse_string($pattern,$string){
         
         $arr = explode ( $pattern , $string );
         return join("",$arr);
     }
+
+    
+    
+    $blog_name;
     $req_username = $_POST['username'];
     $req_password = md5($_POST['passwd']);
     $blogs = scandir('../user_blogs');
@@ -20,46 +24,48 @@
         $password = str_replace(PHP_EOL, '', $password);
         if(strcmp($username,$req_username)==0 && strcmp($password,$req_password)==0){
         $blog_found = TRUE;
-        $blog_dir = '../user_blogs/'.$blogs[$i].'/';
+        $blog_name = $blogs[$i];
+        $blog_dir = '../user_blogs/'.$blog_name.'/';
         }  
         fclose($user_info);
         ++$i;
     }
+    // Applying sempahore in critical zone
+    
     if($blog_found){
         
-        $time_prefix = parse_string('-',$_POST['current_date']).parse_string(':',$_POST['current_time']);
-        $post_id = uniqid($time_prefix.date('s'));
-        $post_dir = $blog_dir.$post_id;
-        mkdir($post_dir,0777);
-        $post_dir = $post_dir.'/';
-        $post_content = fopen($post_dir.$post_id.'.html','w');
-        for($i = 1;$i<3;++$i){
-            $info = pathinfo($_FILES['att'.$i]['name']);
-            $ext = '.'.$info['extension']; 
-            $newname = $time_prefix.$i.$ext; 
-            $target = $post_dir.$newname;
-            move_uploaded_file( $_FILES['att'.$i]['tmp_name'], $target);
-        }
+            sem_acquire($semaphore);
+    
+            $time_prefix = parse_string('-',$_POST['current_date']).parse_string(':',$_POST['current_time']);
+            $post_id = uniqid($time_prefix.date('s'));
+            $post_dir = $blog_dir.$post_id;
+            mkdir($post_dir,0777);
+            $post_dir = $post_dir.'/';
+            $attachments ="";
+        // for($a = 1;$a<4;++$a){
+            
+                
+        // }
         
-        
-        $template = "
-        <div class='post'>
-        <h2>".$_POST['post_title']."</h2>
-        <p>".$_POST['description']."</p>
-        <form action='actions/add_comment.php'>
-        <input name='post_dir' type='hidden' value='".$post_dir."'>
-        <input type='submit' value='Add comment'>
-        <div class='comment_section'>
-        <?php echo 'It is a comment section'; ?>
-        </div>
-        </form>
-        </div>";
+            $post_content = fopen($post_dir.$post_id.'.html','w');
+            $template = "
+            <div class='post'>
+            <h2>".$_POST['post_title']."</h2>
+            <p>".$_POST['description']."</p>"
+            .$attachments.
+            "<form action='actions/add_comment.php'>
+            ".file_get_contents("../add_comment.html").
+            "<input name='post_dir' type='hidden' value='".$post_dir."'/>
+            <input name='blog_dir' type='hidden' value='".$blog_name."'/>
+            </form>
+            </div>";
         // fwrite($post_content,$_POST['post_title'].PHP_EOL);
-        fwrite($post_content,$template);
-        fclose($post_content);
-
+            fwrite($post_content,$template);
+            fclose($post_content);
+            header("Location: ../main_page.html?success=true");
+            sem_release($semaphore);
         
-        header("Location: ../main_page.html?success=true");
+        
     }
     else{
         header("Location: ../main_page.html?success=false");

@@ -6,6 +6,8 @@
 .post{
     border: 1px solid lightgray;
     border-radius: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 .post p{
     padding: 15px;
@@ -14,4 +16,16 @@
 
 .content a:hover div{
     background-color:lightgrey ;
+}
+.comment h3,h4{
+    display: inline-block;
+    margin-right: 15px;
+}
+.comment{
+    
+    text-align: left;
+    margin-top: 5px;
+    width: 90%;
+    margin-left: 10%;
+    border: 1px solid lightgrey;
 }
