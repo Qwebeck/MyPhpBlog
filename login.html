@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login page</title>
+    <link rel="stylesheet" media="screen" href="style/mainLayout.css"/>
+</head>
+<body>
+        <?php  $menu = file_get_contents("menu_bar.html");
+        echo $menu;?>
+        <div class="centered">
+                <h1>Few simple steps to world</h1>
+    <form action="actions/create_blog.php" method="POST">
+        <h2>Tell us about yourself</h2>
+        <input name="blog_name" type="text" placeholder="Enter your title"/>
+        <input name = "username" type="text" placeholder="Enter your name"/>
+        <input name = "passwd" type="password" placeholder="Enter your password"/>
+        <h2>Describe your blog</h2>
+        <textarea name="decription" rows="6" cols="40" placeholder="Few lines about your blog. Just few. Please."></textarea>
+        <div class="buttons">
+                <input type="submit" value="Join">
+                <input type="reset" value="Clean" />        
+        </div>
+    </form>
+        </div>
+
+</body>
+</html>

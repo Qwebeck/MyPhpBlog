@@ -1,0 +1,17 @@
+.content{
+    margin-left: 20%;
+    width: 50%;
+    text-align: center;
+}
+.post{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.post p{
+    padding: 15px;
+    text-align: left;
+}
+
+.content a:hover div{
+    background-color:lightgrey ;
+}
