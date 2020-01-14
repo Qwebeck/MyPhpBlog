@@ -43,15 +43,17 @@
             $post_dir = $post_dir.'/';
             $attachments ="<div class='attachments'> <h4> Blog attachments:</h4>";
             $att_number = 0;
-            for($a = 0;$a <= 3;++$a){
+            $length = count($_FILES);
+            for($a = 0;$a <= $length ;++$a){
                 // if(!isset($_FILES["att".$a])) continue;
-                $path = $_FILES["att".$a]['name'];
+                $path = $_FILES["att_".$a]['name'];
                 $ext = pathinfo($path, PATHINFO_EXTENSION);
                 $target_file = $post_dir.$time_prefix.$a.'.'.$ext;
-            if (move_uploaded_file($_FILES["att".$a]["tmp_name"], $target_file)) {
-                $attachments.="<a href='user_blogs/".$blog_name.'/'.$post_id.'/'.$time_prefix.$a.'.'.$ext."'> Attachment ".$a."</a>";
+            if (move_uploaded_file($_FILES["att_".$a]["tmp_name"], $target_file)) {
+                $attachments.="<div class='links'><a href='user_blogs/".$blog_name.'/'.$post_id.'/'.$time_prefix.$a.'.'.$ext."'> Attachment ".$a."</a></div>";
                 $att_number += 1;
             } else {
+                $attachments.=$_FILES["att_".$a]["tmp_name"];
             }
             }
             $attachments .="</div>";

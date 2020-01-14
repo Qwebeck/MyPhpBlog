@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog</title>
-    <link rel="stylesheet" media="screen" href="style/mainLayout.css"/>
-    <link rel="stylesheet" media="screen" href="style/blogLayout.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/mainLayout.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/blogLayout.css"/>
+    <link href="style/default.css" rel="stylesheet" type="text/css" title="Default">    
+    <link href="style/soft.css" rel="alternate stylesheet" type="text/css" title="Soft">
+    <link href="style/dark.css" rel="alternate stylesheet" type="text/css" title="Dark">
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/main_page.js"></script>
+
 </head>
-<body>
+<body onload="init()">
 <?php  $menu = file_get_contents("menu_bar.html");
         echo $menu;?>
 <div class="content">

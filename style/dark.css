@@ -1,0 +1,51 @@
+body{
+    background-color: #313131;
+}
+#menu li:hover{
+    background-color: #525252;
+}
+body * {
+    color: #d65a31;
+    font-weight: 700;
+}
+
+.content a:hover div{
+    background-color:#525252;
+}
+.comment h3,h4{
+    display: inline-block;
+    margin-right: 15px;
+}
+.comment{
+       
+    text-align: left;
+    margin-top: 5px;
+    width: 90%;
+    margin-left: 6%;
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+.comment:hover{
+    background-color: #414141;
+}
+
+.content form{
+    display: none;
+    margin: 5px;
+    border-top: 1px solid silver;
+}
+
+
+.centered{
+    position: absolute;
+    width: 40%;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2a4d69 ;
+    text-align: center;
+    border: 1px lightgrey;
+    min-height: 50vh;
+    border-radius: 5px;
+    
+}

@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add post</title>
-    <link rel="stylesheet" media="screen" href="style/mainLayout.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/mainLayout.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/blogLayout.css"/>
+    <link href="style/default.css" rel="stylesheet" type="text/css" title="Default">    
+    <link href="style/soft.css" rel="alternate stylesheet" type="text/css" title="Soft">
+    <link href="style/dark.css" rel="alternate stylesheet" type="text/css" title="Dark">
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/validators.js"></script>
+    <script src="scripts/add_post.js"></script>
 </head>
-<body>
+<body onload="init()">
 <?php  $menu = file_get_contents("menu_bar.html");
         echo $menu;?>
     <div class="centered">
@@ -20,11 +27,16 @@
         <h2>And you want to write about</h2>
         <input type="text" name="post_title" placeholder="Post title"/>
         <textarea name="description" rows="6" cols="40" placeholder="Your post going here"></textarea>
-        <input name="current_date" type="date" value="<?php echo date('Y-m-d');?>" />
-        <input name="current_time" type="text" value="<?php echo date('H:i');?>" />
-        Attachment 1 <input type="file" name="att1" />
-        Attachment 2 <input type="file" name="att2" />
-        Attachment 3 <input type="file" name="att3" />
+        <input id='current_date' name="current_date" type="date" onchange="validateDate(event)"/>
+        <input id='current_time' name="current_time" type="time" onblur="validateTime(event)"/>
+        <div id='attachmentContainer'>
+            <!-- Changed attachment name -->
+            Attachments
+             <input class="attachments" type="file" name="att_1" onchange="addBrowseField(event)"/>
+            
+        </div>
+        <!-- Attachment 2 <input type="file" name="att2" /> -->
+        <!-- Attachment 3 <input type="file" name="att3" /> -->
         <div class="buttons">
                 <input type="submit" value="Add post">
                 <input type="reset" value="Clean" />        

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/mainLayout.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/blogLayout.css"/>
+    <link href="style/default.css" rel="stylesheet" type="text/css" title="Default">    
+    <link href="style/soft.css" rel="alternate stylesheet" type="text/css" title="Soft">
+    <link href="style/dark.css" rel="alternate stylesheet" type="text/css" title="Dark">
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/chat.js"></script>
+</head>
+<body onload="init()">
+    <?php  $menu = file_get_contents("menu_bar.html");
+    echo $menu;?>
+<div class="chat-container">
+    <div id='container' class="message-container">
+        <ul id='messages' class="messages">
+            <li>Some message</li>
+        </ul>
+    </div>
+    <div>
+    <form class='chat-form' onsubmit="sendMessage(event)" >
+        <label for="open_chat" onchange="show_chat(event)">Show chat</label> 
+        <input id='open_chat' type="checkbox" onchange="activateChat(event)"> 
+        
+        <input type="text" name="name" placeholder="Name">
+        <textarea name="message" placeholder="Your message"></textarea>
+        <input type="submit" value="Send">
+
+    </form>
+    </div>
+    
+</div>
+</body>
+</html>
